@@ -1,0 +1,21 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#191B1F" />
+      <stop offset="1" stop-color="#050506" />
+    </linearGradient>
+    <linearGradient id="rim" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.7" />
+      <stop offset="0.55" stop-color="#6B7280" stop-opacity="0.25" />
+      <stop offset="1" stop-color="#34D399" stop-opacity="0.8" />
+    </linearGradient>
+    <linearGradient id="mark" x1="18" y1="18" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" />
+      <stop offset="1" stop-color="#A1A1AA" />
+    </linearGradient>
+  </defs>
+  <path d="M16 6H48C53.5228 6 58 10.4772 58 16V44C58 49.5228 53.5228 54 48 54H24L13 60L15 51.5C10.9 49.8 6 46.8 6 41V16C6 10.4772 10.4772 6 16 6Z" fill="url(#bg)" stroke="url(#rim)" stroke-width="2.2" />
+  <path d="M19 21H45" stroke="url(#mark)" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M32 21V42" stroke="url(#mark)" stroke-width="4.5" stroke-linecap="round" />
+  <circle cx="46" cy="40" r="4.5" fill="#34D399" />
+</svg>

@@ -1,0 +1,9 @@
+{
+  "appId": "com.tosto.app",
+  "appName": "Tosto",
+  "webDir": "dist/client",
+  "backgroundColor": "#0a0a0a",
+  "android": {
+    "allowMixedContent": false
+  }
+}
