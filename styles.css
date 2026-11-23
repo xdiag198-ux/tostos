@@ -1,0 +1,496 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * - Keep every @import in this top block, above @theme and the rest of the file. Install an
+ *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
+ *   build resolves @import from the filesystem. Load those with a <link> in the head() of
+ *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The design lives in this file: oklch color tokens on the shadcn variables
+ * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
+ * new tokens as needed, font tokens, and custom styles and animations.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-display: "Unbounded", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-pulse: var(--pulse);
+  --color-rose-pulse: var(--rose-pulse);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  color-scheme: dark;
+  --radius: 0.875rem;
+  --background: oklch(0.2 0.018 250);
+  --foreground: oklch(0.97 0.003 250);
+  --surface-1: oklch(0.255 0.022 250);
+  --surface-2: oklch(0.3 0.026 250);
+  --surface-3: oklch(0.35 0.03 250);
+  --card: oklch(0.255 0.022 250);
+  --card-foreground: oklch(0.97 0.003 250);
+  --popover: oklch(0.27 0.024 250);
+  --popover-foreground: oklch(0.97 0.003 250);
+  --primary: oklch(0.69 0.14 241);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.3 0.026 250);
+  --secondary-foreground: oklch(0.97 0.003 250);
+  --muted: oklch(0.28 0.024 250);
+  --muted-foreground: oklch(0.68 0.03 250);
+  --accent: oklch(0.3 0.026 250);
+  --accent-foreground: oklch(0.97 0.003 250);
+  --pulse: oklch(0.75 0.13 238);
+  --rose-pulse: oklch(0.66 0.22 18);
+  --destructive: oklch(0.63 0.22 22);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 7%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.75 0.13 238 / 45%);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+.dark {
+  --background: oklch(0.2 0.018 250);
+  --foreground: oklch(0.97 0.003 250);
+  --surface-1: oklch(0.255 0.022 250);
+  --surface-2: oklch(0.3 0.026 250);
+  --surface-3: oklch(0.35 0.03 250);
+  --card: oklch(0.255 0.022 250);
+  --card-foreground: oklch(0.97 0.003 250);
+  --popover: oklch(0.27 0.024 250);
+  --popover-foreground: oklch(0.97 0.003 250);
+  --primary: oklch(0.69 0.14 241);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.3 0.026 250);
+  --secondary-foreground: oklch(0.97 0.003 250);
+  --muted: oklch(0.28 0.024 250);
+  --muted-foreground: oklch(0.68 0.03 250);
+  --accent: oklch(0.3 0.026 250);
+  --accent-foreground: oklch(0.97 0.003 250);
+  --pulse: oklch(0.75 0.13 238);
+  --rose-pulse: oklch(0.66 0.22 18);
+  --destructive: oklch(0.63 0.22 22);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 7%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.75 0.13 238 / 45%);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.7 0.13 240);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Ощущение приложения, а не сайта: без подсветки нажатий, выделения интерфейса, резинового скролла. */
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    overscroll-behavior: none;
+  }
+  body {
+    overscroll-behavior: none;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  /* Текст, который можно выделять и копировать: посты, сообщения, поля ввода. */
+  input,
+  textarea,
+  [contenteditable="true"],
+  .selectable {
+    -webkit-user-select: text;
+    user-select: text;
+    -webkit-touch-callout: default;
+  }
+  img,
+  svg {
+    -webkit-user-drag: none;
+  }
+  .overflow-y-auto,
+  .overflow-auto {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  button:not(:disabled),
+  [role="button"] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: default;
+  }
+  /* Фокус только с клавиатуры, без рамок после касания. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: oklch(0.69 0.14 241 / 35%);
+  }
+}
+
+/* На телефоне и планшете полос прокрутки нет. */
+@media (pointer: coarse) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    scrollbar-width: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(1 0 0 / 14%);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(1 0 0 / 28%);
+}
+
+@layer utilities {
+  /* Шапки и панели. На телефоне без размытия: backdrop-filter заметно тормозит скролл на слабых устройствах. */
+  .noir-glass {
+    background: oklch(0.255 0.022 250 / 97%);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .noir-glass {
+      background: oklch(0.255 0.022 250 / 82%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+  }
+
+  .noir-mesh {
+    background-image: none;
+  }
+
+  .noir-grid {
+    background-image: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .noir-grid {
+      background-image:
+        linear-gradient(oklch(1 0 0 / 3%) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(1 0 0 / 3%) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+  }
+
+  .text-platinum {
+    background: linear-gradient(120deg, oklch(0.99 0 0) 0%, oklch(0.86 0.05 240) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .shadow-noir {
+    box-shadow: 0 0 0 1px oklch(1 0 0 / 7%);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .shadow-noir {
+      box-shadow: 0 18px 48px -18px oklch(0 0 0 / 85%), 0 0 0 1px oklch(1 0 0 / 7%);
+    }
+  }
+
+  .shadow-pulse-glow {
+    box-shadow: 0 0 24px -6px oklch(0.75 0.13 238 / 45%);
+  }
+}
+
+/* ───────────── Быстрые нативные штуки ───────────── */
+
+@layer utilities {
+  /* Отступ под нижнюю панель вкладок (на всех размерах экрана). */
+  .pb-tabbar {
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+  }
+  /* Плавающая кнопка «новый пост» над панелью вкладок. */
+  .fab-offset {
+    bottom: calc(6rem + env(safe-area-inset-bottom));
+  }
+}
+
+@layer utilities {
+  /* Нажатие как в Telegram: строка на мгновение подсвечивается. */
+  .tap {
+    transition: background-color 0.15s;
+  }
+  .tap:active {
+    background-color: oklch(1 0 0 / 7%);
+    transition-duration: 0s;
+  }
+  .press {
+    transition: transform 0.12s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .press:active {
+    transform: scale(0.9);
+  }
+  /* Карточки вне экрана не рисуются и не считаются: длинная лента остаётся лёгкой. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 150px;
+  }
+  .anim-fade-up {
+    animation: fade-up 0.26s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+  }
+  .anim-pop-in {
+    animation: pop-in 0.22s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+  }
+  .anim-view-in {
+    animation: view-in 0.18s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+  }
+  .anim-slide-in {
+    animation: slide-in 0.24s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+  }
+  .anim-slide-out {
+    animation: slide-out 0.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+  .anim-like {
+    animation: like-pop 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  }
+  /* Появление списками: --i задаёт порядок элемента. */
+  .stagger-in {
+    animation: fade-up 0.34s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+    animation-delay: calc(min(var(--i, 0), 8) * 40ms);
+  }
+  .anim-sheet-up {
+    animation: sheet-up 0.32s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+  }
+  .anim-fade {
+    animation: view-in 0.2s ease-out backwards;
+  }
+  /* Кольцо при лайке. */
+  .like-ring {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    border: 2px solid var(--rose-pulse);
+    pointer-events: none;
+    animation: ring-burst 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+  /* Скелетон вместо спиннера: ощущение, что контент уже здесь. */
+  .skeleton {
+    background-image: linear-gradient(90deg, var(--surface-2) 30%, var(--surface-3) 50%, var(--surface-2) 70%);
+    background-size: 300% 100%;
+    animation: shimmer 1.3s linear infinite;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.94);
+  }
+}
+@keyframes view-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+}
+@keyframes sheet-up {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+@keyframes ring-burst {
+  from {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+@keyframes slide-in {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+@keyframes slide-out {
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+@keyframes like-pop {
+  0% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .anim-pop-in,
+  .anim-view-in,
+  .anim-slide-in,
+  .anim-slide-out,
+  .anim-like,
+  .stagger-in,
+  .anim-sheet-up,
+  .anim-fade,
+  .like-ring,
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* Нативный Android/WebView: реальная высота окна, IME и состояния приложения. */
+.tosto-app-shell {
+  height: var(--tosto-viewport-height, 100dvh);
+  min-height: 0;
+  min-height: var(--tosto-viewport-height, 100dvh);
+}
+
+html[data-keyboard-open="true"] .tosto-mobile-nav {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 110%, 0);
+  transition: opacity 120ms ease, transform 160ms ease;
+}
+
+html[data-keyboard-open="false"] .tosto-mobile-nav {
+  transition: opacity 160ms ease, transform 180ms ease;
+}
+
+
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-keyboard-open] .tosto-mobile-nav {
+    transition: none;
+  }
+}
